@@ -4,7 +4,7 @@ import 'styles/index.css';
 // eslint-disable-next-line import/no-unresolved
 import { createRoot } from 'react-dom/client';
 
-import { App } from 'components/App';
+import { App } from './App';
 
 const rootElement = document.getElementById('root');
 

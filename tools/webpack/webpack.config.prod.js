@@ -1,3 +1,5 @@
+const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
+
 module.exports = {
   mode: 'production',
   entry: ['./src/index.tsx'],
@@ -11,11 +13,8 @@ module.exports = {
   },
   plugins: [...require('./webpack.plugins')],
   resolve: {
+    plugins: [new TsconfigPathsPlugin()],
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css'],
-    alias: {
-      // Custom Aliases
-      ...require('./webpack.aliases'),
-    },
   },
   stats: 'errors-warnings',
   optimization: {

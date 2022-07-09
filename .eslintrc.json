@@ -138,7 +138,6 @@
         },
         "alias": {
             "map": [
-                ["app", "./src/app"],
                 ["api", "./src/api"],
                 ["assets", "./src/assets"],
                 ["components", "./src/components"],
