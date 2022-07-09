@@ -5,8 +5,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = [
   new ForkTsCheckerWebpackPlugin(),
   new HtmlWebpackPlugin({
-    template: 'src/index.html',
-    favicon: 'assets/images/logo.png',
+    template: 'public/index.html',
+    favicon: 'src/assets/images/logo.png',
     inject: true,
   }),
   new MiniCssExtractPlugin({

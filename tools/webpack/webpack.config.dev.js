@@ -1,6 +1,6 @@
 module.exports = {
   mode: 'development',
-  entry: ['./src/main.tsx'],
+  entry: ['./src/index.tsx'],
   module: {
     rules: require('./webpack.rules'),
   },
@@ -11,19 +11,12 @@ module.exports = {
   plugins: require('./webpack.plugins'),
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css'],
-    alias: {
-      // React Hot Loader Patch
-      'react-dom': '@hot-loader/react-dom',
-      // Custom Aliases
-      ...require('./webpack.aliases'),
-    },
+    alias: { ...require('./webpack.aliases') },
   },
   stats: 'errors-warnings',
   devtool: 'cheap-module-source-map',
   devServer: {
     open: true,
-    stats: 'errors-warnings',
-    hot: true,
   },
   optimization: {
     splitChunks: {

@@ -1,5 +1,5 @@
-const { inDev } = require('./webpack.helpers');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { inDev } = require('./webpack.helpers');
 
 module.exports = [
   {
@@ -37,8 +37,8 @@ module.exports = [
       {
         loader: 'file-loader',
         options: {
-          publicPath: 'assets/images',
-          outputPath: 'assets/images',
+          publicPath: 'src/assets/images',
+          outputPath: 'src/assets/images',
         },
       },
     ],

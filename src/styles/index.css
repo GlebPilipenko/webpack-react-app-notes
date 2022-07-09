@@ -1,0 +1,11 @@
+@import "./fonts/fonts.css";
+@import "~normalize.css";
+
+body {
+    font-family: 'Roboto Regular', sans-serif;
+}
+
+h1 {
+    color: tomato;
+    font-family: 'Roboto Bold', sans-serif;
+}
