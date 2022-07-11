@@ -2,8 +2,8 @@ import React from 'react';
 
 import { BrowserRouter } from 'react-router-dom';
 
-import { TabsMenu } from 'components/index';
-import { Router } from 'routes/index';
+import { TabsMenu } from 'components';
+import { Router } from 'routes';
 import { ReturnComponentType } from 'types';
 
 export const App = (): ReturnComponentType => (
