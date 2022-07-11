@@ -4,14 +4,11 @@ import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 
-import { useFieldValue } from 'hooks';
 import { ReturnComponentType } from 'types';
 
 const regions = [{ region: 'Asia' }, { region: 'Europe' }];
 
-export const Selector = (): ReturnComponentType => {
-  const [region, onSelectRegionChange] = useFieldValue('Asia');
-
+export const Selector = ({ value, onChange }: any): ReturnComponentType => {
   return (
     <Box
       sx={{
@@ -22,8 +19,8 @@ export const Selector = (): ReturnComponentType => {
         id="outlined-select-currency"
         select
         label="Точное время по:"
-        value={region}
-        onChange={onSelectRegionChange}
+        value={value}
+        onChange={onChange}
       >
         {regions.map(option => (
           <MenuItem key={option.region} value={option.region}>

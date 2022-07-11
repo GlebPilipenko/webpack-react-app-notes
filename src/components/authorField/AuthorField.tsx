@@ -3,15 +3,13 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-import { PropsType } from './types';
-
 import { ReturnComponentType } from 'types';
 
 export const AuthorField = ({
-  author,
+  value,
   onChange,
   hasFieldError,
-}: PropsType): ReturnComponentType => {
+}: any): ReturnComponentType => {
   return (
     <Box
       sx={{
@@ -21,7 +19,7 @@ export const AuthorField = ({
       <TextField
         id="outlined-basic"
         label="Подпись"
-        value={author}
+        value={value}
         onChange={onChange}
         error={hasFieldError}
         variant="outlined"

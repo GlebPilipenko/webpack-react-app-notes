@@ -1,3 +1,7 @@
 import { BaseOnChangeType } from 'types';
 
-export type UseFieldValueReturnType = [string, BaseOnChangeType];
+export type UseFieldValueReturnType = [
+  string,
+  BaseOnChangeType,
+  (newValue: string) => void,
+];
