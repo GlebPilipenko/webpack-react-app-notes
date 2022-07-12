@@ -1,15 +1,25 @@
 import { call, put } from 'redux-saga/effects';
 
-import { getTimeZone } from 'services/api';
-import { setTimeZones } from 'store/slices/notes';
+import { StatusCode } from 'enums';
+import { getTimeZones } from 'services/api';
+import { changeIsDataLoading, setTimeZones } from 'store/slices/notes';
+import { GeneratorType } from 'types';
 
-export default function* loadTimeZonesWorker(): Generator {
+export default function* loadTimeZonesWorker(): GeneratorType<string[]> {
   try {
-    const timeZones = yield call(getTimeZone);
+    yield put(changeIsDataLoading(true));
 
-    if (Array.isArray(timeZones) && timeZones.length > 0) {
-      yield put(setTimeZones(timeZones));
+    const response = yield call(getTimeZones);
+
+    if (response.status === StatusCode.Successes) {
+      const { data: timeZones } = response;
+
+      if (Array.isArray(timeZones) && timeZones.length > 0) {
+        yield put(setTimeZones(timeZones));
+      }
     }
+
+    yield put(changeIsDataLoading(false));
   } catch (err) {
     console.log(err);
   }

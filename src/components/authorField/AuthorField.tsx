@@ -8,7 +8,7 @@ import { ReturnComponentType } from 'types';
 export const AuthorField = ({
   value,
   onChange,
-  hasFieldError,
+  hasAuthorError,
 }: any): ReturnComponentType => {
   return (
     <Box
@@ -21,7 +21,7 @@ export const AuthorField = ({
         label="Подпись"
         value={value}
         onChange={onChange}
-        error={hasFieldError}
+        error={hasAuthorError}
         variant="outlined"
         required
       />

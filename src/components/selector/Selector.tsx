@@ -6,28 +6,24 @@ import TextField from '@mui/material/TextField';
 
 import { ReturnComponentType } from 'types';
 
-const regions = [{ region: 'Asia' }, { region: 'Europe' }];
-
-export const Selector = ({ value, onChange }: any): ReturnComponentType => {
-  return (
-    <Box
-      sx={{
-        '& .MuiTextField-root': { width: '25ch' },
-      }}
+export const Selector = ({ value, regions, onChange }: any): ReturnComponentType => (
+  <Box
+    sx={{
+      '& .MuiTextField-root': { width: '25ch' },
+    }}
+  >
+    <TextField
+      id="outlined-select-currency"
+      select
+      label="Точное время по:"
+      value={value}
+      onChange={onChange}
     >
-      <TextField
-        id="outlined-select-currency"
-        select
-        label="Точное время по:"
-        value={value}
-        onChange={onChange}
-      >
-        {regions.map(option => (
-          <MenuItem key={option.region} value={option.region}>
-            {option.region}
-          </MenuItem>
-        ))}
-      </TextField>
-    </Box>
-  );
-};
+      {regions.map(region => (
+        <MenuItem key={region} value={region}>
+          {region}
+        </MenuItem>
+      ))}
+    </TextField>
+  </Box>
+);
