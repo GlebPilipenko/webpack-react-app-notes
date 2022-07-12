@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 // eslint-disable-next-line import/no-unresolved
 import SendIcon from '@mui/icons-material/Send';
-import Button from '@mui/material/Button';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 import { PropsType } from './types';
 
@@ -14,8 +14,15 @@ export const CustomButton: FC<PropsType> = ({
   children,
 }): ReturnComponentType => {
   return (
-    <Button type={type} disabled={isDisabled} variant="contained" endIcon={<SendIcon />}>
+    <LoadingButton
+      type={type}
+      loading={isDisabled}
+      disabled={isDisabled}
+      loadingPosition="start"
+      startIcon={<SendIcon />}
+      variant="contained"
+    >
       {children}
-    </Button>
+    </LoadingButton>
   );
 };

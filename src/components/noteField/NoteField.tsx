@@ -3,9 +3,12 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-import { ReturnComponentType } from 'types';
+import { BaseTextFieldPropsType, ReturnComponentType } from 'types';
 
-export const NoteField = ({ value, onChange }: any): ReturnComponentType => {
+export const NoteField = ({
+  value,
+  onChange,
+}: BaseTextFieldPropsType): ReturnComponentType => {
   return (
     <Box
       sx={{

@@ -4,9 +4,15 @@ import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 
+import { PropsType } from './types';
+
 import { ReturnComponentType } from 'types';
 
-export const Selector = ({ value, regions, onChange }: any): ReturnComponentType => (
+export const Selector = ({
+  value,
+  regions,
+  onChange,
+}: PropsType): ReturnComponentType => (
   <Box
     sx={{
       '& .MuiTextField-root': { width: '25ch' },

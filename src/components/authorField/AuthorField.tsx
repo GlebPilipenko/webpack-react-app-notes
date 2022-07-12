@@ -3,13 +3,15 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
+import { PropsType } from './types';
+
 import { ReturnComponentType } from 'types';
 
 export const AuthorField = ({
   value,
   onChange,
   hasAuthorError,
-}: any): ReturnComponentType => {
+}: PropsType): ReturnComponentType => {
   return (
     <Box
       sx={{

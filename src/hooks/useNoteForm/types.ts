@@ -1,4 +1,6 @@
-import { ChangeEvent, SyntheticEvent } from 'react';
+import { SyntheticEvent } from 'react';
+
+import { BaseOnChangeType } from 'types';
 
 export type UseNoteFormReturnType = [
   string,
@@ -8,7 +10,7 @@ export type UseNoteFormReturnType = [
   boolean,
   boolean,
   (event: SyntheticEvent) => void,
-  (event: ChangeEvent<HTMLInputElement>) => void,
-  (event: ChangeEvent<HTMLInputElement>) => void,
-  (event: ChangeEvent<HTMLInputElement>) => void,
+  BaseOnChangeType,
+  BaseOnChangeType,
+  BaseOnChangeType,
 ];
