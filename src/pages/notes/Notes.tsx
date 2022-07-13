@@ -3,7 +3,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import { useSelector } from 'react-redux';
 
-import { Note, Notification } from 'components';
+import { Note, Notification, Pagination } from 'components';
 import { NotificationColor } from 'enums';
 import { selectNotes } from 'store/selectors';
 import { ReturnComponentType } from 'types';
@@ -20,20 +20,22 @@ export const Notes = (): ReturnComponentType => {
   }
 
   return (
-    <Box sx={{ maxWidth: 1000 }}>
+    <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
       <Box
         sx={{
-          width: '100%',
           display: 'flex',
+          justifyContent: 'flex-start',
           flexWrap: 'wrap',
-          gap: '10px',
-          margin: '0 auto',
+          gap: '16px',
+          mb: '16px',
         }}
       >
         {notes.map(note => (
-          <Note key={`${note.date.unixtime}`} {...note} />
+          <Note key={`${note.date.utc_datetime}`} {...note} />
         ))}
       </Box>
+
+      <Pagination notes={notes} />
     </Box>
   );
 };

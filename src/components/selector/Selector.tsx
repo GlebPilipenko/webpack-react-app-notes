@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 
@@ -13,24 +12,19 @@ export const Selector = ({
   regions,
   onChange,
 }: PropsType): ReturnComponentType => (
-  <Box
-    sx={{
-      '& .MuiTextField-root': { width: '25ch' },
-    }}
+  <TextField
+    sx={{ width: '30%' }}
+    id="outlined-select-currency"
+    select
+    label="Точное время по"
+    value={value}
+    onChange={onChange}
+    required
   >
-    <TextField
-      id="outlined-select-currency"
-      select
-      label="Точное время по"
-      value={value}
-      onChange={onChange}
-      required
-    >
-      {regions.map(region => (
-        <MenuItem key={region} value={region}>
-          {region}
-        </MenuItem>
-      ))}
-    </TextField>
-  </Box>
+    {regions.map(region => (
+      <MenuItem key={region} value={region}>
+        {region}
+      </MenuItem>
+    ))}
+  </TextField>
 );

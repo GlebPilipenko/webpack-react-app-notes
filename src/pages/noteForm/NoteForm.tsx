@@ -1,17 +1,17 @@
 import React from 'react';
 
+// eslint-disable-next-line import/no-unresolved
+import SendIcon from '@mui/icons-material/Send';
+import LoadingButton from '@mui/lab/LoadingButton';
 import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
-import { useStyles } from './styles';
-
-import { AuthorField, CustomButton, NoteField, Notification, Selector } from 'components';
+import { Notification, Selector } from 'components';
 import { NotificationColor } from 'enums/NotificationColor';
 import { useNoteForm } from 'hooks';
 import { ReturnComponentType } from 'types';
 
 export const NoteForm = (): ReturnComponentType => {
-  const styles = useStyles();
-
   const [
     region,
     author,
@@ -30,32 +30,41 @@ export const NoteForm = (): ReturnComponentType => {
   return (
     <Box
       component="form"
+      sx={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '16px' }}
       onSubmit={onNoteFormSubmit}
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
     >
-      <Box classes={{ root: styles.container }}>
-        <Box sx={{ mb: 2 }}>
-          <NoteField value={noteValue} onChange={onNoteValueChange} />
-        </Box>
-
-        <Box sx={{ display: 'flex', mb: 2, gap: 2 }}>
-          <AuthorField
-            value={author}
-            onChange={onAuthorChange}
-            hasAuthorError={hasAuthorError}
-          />
-          <Selector value={region} regions={regions} onChange={onSelectRegionChange} />
-        </Box>
-
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <CustomButton type="submit" isDisabled={isButtonDisabled}>
-            Создать
-          </CustomButton>
-        </Box>
+      <TextField
+        id="outlined-multiline-flexible"
+        label="Запись"
+        value={noteValue}
+        onChange={onNoteValueChange}
+        rows={5}
+        multiline
+      />
+      <Box sx={{ display: 'flex', gap: '16px' }}>
+        <TextField
+          sx={{ minWidth: '70%' }}
+          id="outlined-basic"
+          label="Подпись"
+          value={author}
+          onChange={onAuthorChange}
+          error={hasAuthorError}
+          required
+        />
+        <Selector value={region} regions={regions} onChange={onSelectRegionChange} />
       </Box>
+
+      <LoadingButton
+        type="submit"
+        loading={isButtonDisabled}
+        disabled={isButtonDisabled}
+        loadingPosition="start"
+        startIcon={<SendIcon />}
+        variant="contained"
+        sx={{ maxWidth: '150px', alignSelf: 'flex-end' }}
+      >
+        Создать
+      </LoadingButton>
 
       {isNotificationShowed && (
         <Notification
