@@ -21,9 +21,10 @@ export const Selector = ({
     <TextField
       id="outlined-select-currency"
       select
-      label="Точное время по:"
+      label="Точное время по"
       value={value}
       onChange={onChange}
+      required
     >
       {regions.map(region => (
         <MenuItem key={region} value={region}>

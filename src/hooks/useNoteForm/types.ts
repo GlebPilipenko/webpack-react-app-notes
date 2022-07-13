@@ -9,8 +9,10 @@ export type UseNoteFormReturnType = [
   string[],
   boolean,
   boolean,
+  boolean,
   (event: SyntheticEvent) => void,
   BaseOnChangeType,
   BaseOnChangeType,
   BaseOnChangeType,
+  (newValue: boolean) => void,
 ];

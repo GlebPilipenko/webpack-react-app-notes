@@ -7,14 +7,14 @@ import { NoteForm, Notes } from 'pages';
 import { ReturnComponentType } from 'types';
 
 export const Router = (): ReturnComponentType => {
-  const location = useLocation();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    if (location.pathname === Path.Main) {
+    if (pathname === Path.Main) {
       navigate(Path.Form);
     }
-  }, [navigate, location.pathname]);
+  }, [navigate, pathname]);
 
   return (
     <Routes>

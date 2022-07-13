@@ -1,5 +1,6 @@
 import { RootStoreType } from 'store';
-import { RegionDateInformationType } from 'types';
+import { Nullable, RegionDateInformationType } from 'types';
 
-export const selectDateInformation = (state: RootStoreType): RegionDateInformationType =>
-  state.noteList.dateInformation;
+export const selectDateInformation = (
+  state: RootStoreType,
+): Nullable<RegionDateInformationType> => state.noteList.dateInformation;

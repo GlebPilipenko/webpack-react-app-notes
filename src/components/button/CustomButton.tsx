@@ -12,17 +12,15 @@ export const CustomButton: FC<PropsType> = ({
   type,
   isDisabled,
   children,
-}): ReturnComponentType => {
-  return (
-    <LoadingButton
-      type={type}
-      loading={isDisabled}
-      disabled={isDisabled}
-      loadingPosition="start"
-      startIcon={<SendIcon />}
-      variant="contained"
-    >
-      {children}
-    </LoadingButton>
-  );
-};
+}): ReturnComponentType => (
+  <LoadingButton
+    type={type}
+    loading={isDisabled}
+    disabled={isDisabled}
+    loadingPosition="start"
+    startIcon={<SendIcon />}
+    variant="contained"
+  >
+    {children}
+  </LoadingButton>
+);

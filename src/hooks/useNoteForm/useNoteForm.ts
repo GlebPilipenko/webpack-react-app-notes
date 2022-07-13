@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { UseNoteFormReturnType } from './types';
 
 import { Path, ReducerKey, LocalStorageKey } from 'enums';
-import { useFieldValue } from 'hooks';
+import { useFieldValue, useNotification } from 'hooks';
 import { parseLocalStorageOrReturnNull } from 'services/localStorage';
 import { loadDateInformation, loadTimeZones } from 'store/actions';
 import {
@@ -16,11 +16,8 @@ import {
 import { addNote, setDateInformation } from 'store/slices/notes';
 import { isEmpty } from 'utils';
 
-const FIRST_REGION = 0;
 const MAX_AUTHOR_LENGTH = 100;
 const MINIMAL_NOTES_LENGTH = 0;
-
-const DEFAULT_SELECT_VALUE = 'Africa/Abidjan';
 
 export const useNoteForm = (): UseNoteFormReturnType => {
   const dispatch = useDispatch();
@@ -29,21 +26,17 @@ export const useNoteForm = (): UseNoteFormReturnType => {
   const isDataLoading = useSelector(selectIsDataLoading);
   const dateInformation = useSelector(selectDateInformation);
 
-  const [author, handleAuthorChange, handleSetAuthor] = useFieldValue('');
-  const [noteValue, handleNoteValueChange, handleSetNoteValue] = useFieldValue('');
-  const [region, handleSelectRegionChange, handleSetRegion] = useFieldValue(
-    regions[FIRST_REGION] ?? DEFAULT_SELECT_VALUE,
-  );
+  const [author, handleAuthorChange, handleSetAuthor] = useFieldValue();
+  const [region, handleSelectRegionChange, handleSetRegion] = useFieldValue();
+  const [noteValue, handleNoteValueChange, handleSetNoteValue] = useFieldValue();
+  const [isNotificationShowed, handleSetIsNotificationShowed] = useNotification();
 
   const hasAuthorError = author.length > MAX_AUTHOR_LENGTH;
   const isButtonDisabled = isDataLoading || hasAuthorError;
 
   const onNoteFormSubmit = (event: SyntheticEvent): void => {
     event.preventDefault();
-
     dispatch(loadDateInformation(region));
-
-    handleSetNoteValue('');
   };
 
   useEffect(() => {
@@ -57,6 +50,9 @@ export const useNoteForm = (): UseNoteFormReturnType => {
 
       dispatch(addNote(note));
       dispatch(setDateInformation(null));
+
+      handleSetNoteValue('');
+      handleSetIsNotificationShowed(true);
     }
   }, [dispatch, dateInformation]);
 
@@ -87,24 +83,28 @@ export const useNoteForm = (): UseNoteFormReturnType => {
       author,
       noteValue,
       regions,
+      isNotificationShowed,
       hasAuthorError,
       isButtonDisabled,
       onNoteFormSubmit,
       handleAuthorChange,
       handleNoteValueChange,
       handleSelectRegionChange,
+      handleSetIsNotificationShowed,
     ],
     [
       region,
       author,
       noteValue,
       regions,
+      isNotificationShowed,
       hasAuthorError,
       isButtonDisabled,
       onNoteFormSubmit,
       handleAuthorChange,
       handleNoteValueChange,
       handleSelectRegionChange,
+      handleSetIsNotificationShowed,
     ],
   );
 };

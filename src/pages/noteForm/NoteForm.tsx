@@ -4,7 +4,8 @@ import Box from '@mui/material/Box';
 
 import { useStyles } from './styles';
 
-import { AuthorField, CustomButton, NoteField, Selector } from 'components';
+import { AuthorField, CustomButton, NoteField, Notification, Selector } from 'components';
+import { NotificationColor } from 'enums/NotificationColor';
 import { useNoteForm } from 'hooks';
 import { ReturnComponentType } from 'types';
 
@@ -16,12 +17,14 @@ export const NoteForm = (): ReturnComponentType => {
     author,
     noteValue,
     regions,
+    isNotificationShowed,
     hasAuthorError,
     isButtonDisabled,
     onNoteFormSubmit,
-    handleAuthorChange,
-    handleNoteValueChange,
-    handleSelectRegionChange,
+    onAuthorChange,
+    onNoteValueChange,
+    onSelectRegionChange,
+    onSetIsNotificationShowed,
   ] = useNoteForm();
 
   return (
@@ -35,20 +38,16 @@ export const NoteForm = (): ReturnComponentType => {
     >
       <Box classes={{ root: styles.container }}>
         <Box sx={{ mb: 2 }}>
-          <NoteField value={noteValue} onChange={handleNoteValueChange} />
+          <NoteField value={noteValue} onChange={onNoteValueChange} />
         </Box>
 
         <Box sx={{ display: 'flex', mb: 2, gap: 2 }}>
           <AuthorField
             value={author}
-            onChange={handleAuthorChange}
+            onChange={onAuthorChange}
             hasAuthorError={hasAuthorError}
           />
-          <Selector
-            value={region}
-            regions={regions}
-            onChange={handleSelectRegionChange}
-          />
+          <Selector value={region} regions={regions} onChange={onSelectRegionChange} />
         </Box>
 
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -57,6 +56,15 @@ export const NoteForm = (): ReturnComponentType => {
           </CustomButton>
         </Box>
       </Box>
+
+      {isNotificationShowed && (
+        <Notification
+          severity={NotificationColor.Success}
+          onClose={onSetIsNotificationShowed}
+        >
+          Заметка успешно добавлена!
+        </Notification>
+      )}
     </Box>
   );
 };

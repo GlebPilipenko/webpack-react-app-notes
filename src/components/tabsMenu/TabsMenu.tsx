@@ -3,14 +3,16 @@ import React, { SyntheticEvent, useState } from 'react';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-import { Path } from 'enums';
+import { Path, TabId } from 'enums';
 import { ReturnComponentType } from 'types';
-import { setA11yTabProps } from 'utils';
+import { configCurrentTabId, setA11yTabProps } from 'utils';
 
 export const TabsMenu = (): ReturnComponentType => {
-  const [tabId, setTabId] = useState(0);
+  const { pathname } = useLocation();
+
+  const [tabId, setTabId] = useState(configCurrentTabId(pathname));
 
   const onTabsChange = (event: SyntheticEvent, id: number): void => {
     setTabId(id);
@@ -24,9 +26,14 @@ export const TabsMenu = (): ReturnComponentType => {
             label="Создать запись"
             to={Path.Form}
             component={Link}
-            {...setA11yTabProps(0)}
+            {...setA11yTabProps(TabId.Form)}
           />
-          <Tab label="Записи" to={Path.Notes} component={Link} {...setA11yTabProps(1)} />
+          <Tab
+            label="Записи"
+            to={Path.Notes}
+            component={Link}
+            {...setA11yTabProps(TabId.Notes)}
+          />
         </Tabs>
       </Box>
     </Box>

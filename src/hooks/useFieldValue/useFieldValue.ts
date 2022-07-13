@@ -2,8 +2,8 @@ import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 
 import { UseFieldValueReturnType } from './types';
 
-export const useFieldValue = (initialValue: string): UseFieldValueReturnType => {
-  const [fieldValue, setFieldValue] = useState(initialValue);
+export const useFieldValue = (): UseFieldValueReturnType => {
+  const [fieldValue, setFieldValue] = useState('');
 
   const handleSetFieldValue = useCallback((newValue): void => {
     setFieldValue(newValue);
