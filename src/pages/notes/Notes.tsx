@@ -1,15 +1,33 @@
-import React from 'react';
+import React, { ChangeEvent, useState } from 'react';
 
 import Box from '@mui/material/Box';
+import TablePagination from '@mui/material/TablePagination';
 import { useSelector } from 'react-redux';
 
-import { Note, Notification, Pagination } from 'components';
+import { Notification, NotesTable } from 'components';
 import { NotificationColor } from 'enums';
 import { selectNotes } from 'store/selectors';
-import { ReturnComponentType } from 'types';
+import { Nullable, ReturnComponentType } from 'types';
 
 export const Notes = (): ReturnComponentType => {
   const notes = useSelector(selectNotes);
+
+  const [page, setPage] = useState(0);
+  const [notesPerPage, setNotesPerPage] = useState(10);
+
+  const handlePageChange = (
+    event: Nullable<React.MouseEvent<HTMLButtonElement>>,
+    newPage: number,
+  ): void => {
+    setPage(newPage);
+  };
+
+  const handleRowsPerPageChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ): void => {
+    setNotesPerPage(Number(event.target.value));
+    setPage(0);
+  };
 
   if (notes.length === 0) {
     return (
@@ -21,21 +39,17 @@ export const Notes = (): ReturnComponentType => {
 
   return (
     <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'flex-start',
-          flexWrap: 'wrap',
-          gap: '16px',
-          mb: '16px',
-        }}
-      >
-        {notes.map(note => (
-          <Note key={`${note.date.utc_datetime}`} {...note} />
-        ))}
-      </Box>
+      <NotesTable page={page} notes={notes} notesPerPage={notesPerPage} />
 
-      <Pagination notes={notes} />
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 50]}
+        component="div"
+        count={notes.length}
+        rowsPerPage={notesPerPage}
+        page={page}
+        onPageChange={handlePageChange}
+        onRowsPerPageChange={handleRowsPerPageChange}
+      />
     </Box>
   );
 };
